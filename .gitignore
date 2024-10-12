@@ -1,0 +1,15 @@
+misc/vivado-docker/*.env
+misc/vivado-docker/*.bin
+
+vivado*.jou
+vivado*.log
+vivado*.str
+clockinfo.txt
+
+build/
+.Xil/
+
+project/*
+!project/*.tcl
+
+*.vcd
