@@ -1,5 +1,5 @@
 {
-    "designName": "dff-test",
+    "designName": "thoth-rv32",
     "hdlType" : "v",
     "topModule": "top",
     "fpgaPart": "xc7a35tcpg236-1"

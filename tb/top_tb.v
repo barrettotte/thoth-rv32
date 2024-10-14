@@ -2,30 +2,24 @@
 `timescale 1ns/1ps
 
 module top_tb;
-    // constants
-
-    // clock frequency in megahertz
+    // clock frequency in Hz
     localparam CLK_FREQ = 100 * (10**6); // 100MHz
 
     // clock period
-    // T = (1 / f) * (10^7)
+    // T = (1 / f) * (10^9)
     // Example: (1 / (100 * (10^6))) * (10^9) = 10ns
-    localparam CLK_PERIOD = (10**9 / (CLK_FREQ));
+    localparam CLK_PERIOD = (10**9) / CLK_FREQ;
 
     // inputs
     reg clk = 0;
     reg reset = 0;
-    reg [7:0] d = 0;
 
     // outputs
-    wire [7:0] q;
 
     // design under test
     top DUT (
         .clk_i(clk), 
-        .reset_i(reset),
-        .d_i(d),
-        .q_o(q)
+        .reset_i(reset)
     );
 
     // clock generation (100MHz)
@@ -39,7 +33,6 @@ module top_tb;
         $dumpvars(0, top_tb);
 
         // init
-        d = 0;
         reset = 1;
         #(CLK_PERIOD);
 
@@ -47,11 +40,7 @@ module top_tb;
         reset = 0;
         #(3 * CLK_PERIOD);
 
-        // test data
-        d = 8'b00110011;
-        #(3 * CLK_PERIOD);
-        d = 8'b11110000;
-        #(3 * CLK_PERIOD);
+        // test behavior
 
         // test reset again
         reset = 1;

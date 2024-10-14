@@ -1,20 +1,33 @@
 `timescale 1ns/1ps
 
-`include "./n_dff.v"
+`include "./clock_div.v"
+`include "./core.v"
 
-module top (
-        input wire clk_i,     // clock
-        input wire reset_i,   // reset
-        input wire [7:0] d_i, // input data
-        output wire [7:0] q_o // output data
-    );
-    
-    // instantiate n-bit D Flip-Flop
-    n_dff #(.N_BITS(8)) dff (
+module top
+(
+    input wire clk_i,  // clock
+    input wire reset_i // reset
+);
+    // constants
+    localparam CLK_FREQ = 100 * (10**6);           // clock frequency; 100MHz
+    localparam CLK_PERIOD = (10**9) / CLK_FREQ;    // clock period in ns; 10ns
+    localparam CORE_FREQ = 1 * (10**6);            // clock frequency to use in core; 1MHz
+    localparam CLK_DIVISOR = CLK_FREQ / CORE_FREQ; // amount to divide clock by
+
+    // wires/regs
+    wire core_clk; // divided clock signal to use with core
+
+    initial begin
+        // nop
+    end
+
+    // generate core clock signal
+    clock_div #(
+        .DIVISOR(CLK_DIVISOR)
+    ) clk_div (
         .clk_i(clk_i),
         .reset_i(reset_i),
-        .d_i(d_i),
-        .q_o(q_o)
+        .clk_o(core_clk)
     );
 
 endmodule
