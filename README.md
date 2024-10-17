@@ -1,6 +1,16 @@
 # thoth-rv32
 
-TODO:
+Single cycle RISC-V core supporting most of RV32I.
+
+Implemented RV32I instructions minus `FENCE`, `ECALL`, `EBREAK`, and `CSRR`.
+
+## Limitations
+
+- I did not implement entire RV32I instruction set
+- Memory is small and does not synthesize to BRAM of FPGA
+- This is only partially tested since this was meant as a warmup project (and I'm lazy)
+  - everyone seems to recommend testing with - https://github.com/riscv-software-src/riscv-tests
+- I'm not sure if I'll convert this to a pipelined design or save it for another project
 
 ## Development
 
@@ -37,4 +47,4 @@ are in system path with `vivado -version`.
 - [Basys 3 Reference Manual](https://digilent.com/reference/programmable-logic/basys-3/reference-manual)
 - [Vivado Design Suite Tcl Command Reference Guide](https://docs.amd.com/r/en-US/ug835-vivado-tcl-commands)
 - https://projectf.io/posts/vivado-tcl-build-script/
-- https://riscv.org/wp-content/uploads/2019/12/riscv-spec-20191213.pdf
+- https://github.com/riscv/riscv-isa-manual/releases/tag/20240411

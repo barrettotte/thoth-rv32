@@ -27,7 +27,7 @@ module alu
             `ALU_GTEU:  result_o <= ((a_i >= b_i) ? 1 : 0);
             `ALU_GTE:   result_o <= (($signed(a_i) >= $signed(b_i)) ? 1 : 0);
             `ALU_JALR:  result_o <= (($signed(a_i) + $signed(b_i)) & 32'hfffffffe);
-            default:    result_o <= 'hx; // 4'b1110, 4'b1111
+            default:    result_o <= 'hx;
         endcase
     end
 

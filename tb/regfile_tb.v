@@ -63,22 +63,22 @@ module regfile_tb;
         wen = 1'b1;
         rd_data = 'h1337;
         #(CLK_PERIOD);
-        `ASSERT('h1337, rs1_data);
-        `ASSERT('h1337, rs2_data);
+        `ASSERT('h1337, rs1_data)
+        `ASSERT('h1337, rs2_data)
 
         // test write disabled and read
         wen = 1'b0;
         rd_data = 'h1234;
         #(CLK_PERIOD);
-        `ASSERT('h1337, rs1_data);
-        `ASSERT('h1337, rs2_data);
+        `ASSERT('h1337, rs1_data)
+        `ASSERT('h1337, rs2_data)
 
         // test read zero register
         rs1_idx = 0;
         rs2_idx = 0;
         #(CLK_PERIOD);
-        `ASSERT(0, rs1_data);
-        `ASSERT(0, rs2_data);
+        `ASSERT(0, rs1_data)
+        `ASSERT(0, rs2_data)
 
         // wait a bit longer
         #(3 * CLK_PERIOD);

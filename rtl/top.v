@@ -1,33 +1,32 @@
 `timescale 1ns/1ps
 
-`include "./clock_div.v"
-`include "./core.v"
+`include "./soc.v"
 
 module top
 (
-    input wire clk_i,  // clock
-    input wire reset_i // reset
+    input wire clk_i,   // clock
+    input wire reset_i, // reset
+
+    // debug ports
+    output wire [15:0] r1_o 
 );
-    // constants
-    localparam CLK_FREQ = 100 * (10**6);           // clock frequency; 100MHz
-    localparam CLK_PERIOD = (10**9) / CLK_FREQ;    // clock period in ns; 10ns
-    localparam CORE_FREQ = 1 * (10**6);            // clock frequency to use in core; 1MHz
-    localparam CLK_DIVISOR = CLK_FREQ / CORE_FREQ; // amount to divide clock by
+    wire [31:0] r1;
 
-    // wires/regs
-    wire core_clk; // divided clock signal to use with core
+    assign r1_o = r1[15:0];
 
-    initial begin
-        // nop
-    end
-
-    // generate core clock signal
-    clock_div #(
-        .DIVISOR(CLK_DIVISOR)
-    ) clk_div (
+    soc #(
+        .CLK_FREQ(100 * (10**6)), // 100MHz
+        .CORE_FREQ(1 * (10**6)),  // 1MHz
+        .IMEM_SIZE(256),
+        .DMEM_SIZE(256)
+    ) soc0 (
         .clk_i(clk_i),
         .reset_i(reset_i),
-        .clk_o(core_clk)
+        
+        // debug ports
+        .r1_o(r1),
+        .r2_o(),
+        .r3_o()
     );
 
 endmodule

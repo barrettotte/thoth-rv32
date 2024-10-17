@@ -38,7 +38,6 @@ module alu_tb;
         op = `ALU_SUB;
         #2 `ASSERT((42 - 1337), result)
         
-
         // AND
         op = `ALU_AND;
         #2 `ASSERT((42 & 1337), result)

@@ -13,3 +13,4 @@ project/*
 !project/*.tcl
 
 *.vcd
+tmp/
